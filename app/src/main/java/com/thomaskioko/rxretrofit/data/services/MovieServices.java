@@ -1,4 +1,4 @@
-package com.thomaskioko.rxretrofit.service;
+package com.thomaskioko.rxretrofit.data.services;
 
 
 import com.thomaskioko.rxretrofit.model.MovieResult;

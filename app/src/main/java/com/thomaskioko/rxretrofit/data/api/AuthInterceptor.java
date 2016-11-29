@@ -1,4 +1,4 @@
-package com.thomaskioko.rxretrofit.api;
+package com.thomaskioko.rxretrofit.data.api;
 
 
 import com.thomaskioko.rxretrofit.BuildConfig;
