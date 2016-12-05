@@ -72,7 +72,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onNext(MovieResult movieResult) {
 
-                        mActivityMainBinding.recyclerViewList.setAdapter(new MovieListAdapter(movieResult.getResults()));
+                        mActivityMainBinding.recyclerViewList.setAdapter(new MovieListAdapter(getApplicationContext(),
+                                movieResult.getResults()));
                     }
                 });
     }
