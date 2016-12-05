@@ -1,5 +1,7 @@
 package com.thomaskioko.rxretrofit.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +16,8 @@ import java.util.List;
 public class Movie {
 
     private List<String> genre = new ArrayList<>();
-    private String image;
+    @SerializedName(value = "poster_path")
+    public String posterUrl;
     private Double rating;
     private Integer releaseYear;
     private String title;
@@ -34,17 +37,17 @@ public class Movie {
     }
 
     /**
-     * @return The image
+     * @return The posterUrl
      */
-    public String getImage() {
-        return image;
+    public String getPosterUrl() {
+        return posterUrl;
     }
 
     /**
-     * @param image The image
+     * @param posterUrl The posterUrl
      */
-    public void setImage(String image) {
-        this.image = image;
+    public void setPosterUrl(String posterUrl) {
+        this.posterUrl = posterUrl;
     }
 
     /**
