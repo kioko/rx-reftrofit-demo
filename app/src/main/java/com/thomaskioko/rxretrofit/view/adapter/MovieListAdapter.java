@@ -1,5 +1,6 @@
 package com.thomaskioko.rxretrofit.view.adapter;
 
+import android.content.Context;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
@@ -15,6 +16,7 @@ import com.thomaskioko.rxretrofit.R;
 import com.thomaskioko.rxretrofit.databinding.ListMovieItemBinding;
 import com.thomaskioko.rxretrofit.model.Movie;
 import com.thomaskioko.rxretrofit.util.ApplicationConstants;
+import com.thomaskioko.rxretrofit.viewmodel.MovieViewModel;
 
 import java.util.List;
 
@@ -25,15 +27,17 @@ import java.util.List;
 public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.ViewHolder> {
 
     private List<Movie> mMovieList;
-    private static final String LOG_TAG = MovieListAdapter.class.getSimpleName();
+    private Context mContext;
 
     /**
      * Constructor
      *
-     * @param movieList
+     * @param context   {@link Context }Context in which the class is callled
+     * @param movieList List of movie objects.
      */
-    public MovieListAdapter(List<Movie> movieList) {
+    public MovieListAdapter(Context context, List<Movie> movieList) {
         mMovieList = movieList;
+        mContext = context;
 
     }
 
@@ -51,7 +55,11 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         Movie movie = mMovieList.get(position);
+        //set values to the Binding class.
         holder.getViewDataBinding().setVariable(BR.movie, movie);
+        holder.getViewDataBinding().setVariable(BR.viewModel, new MovieViewModel(mContext, movie));
+        
+        //Evaluates the pending bindings, updating any Views that have expressions bound to modified variables
         holder.getViewDataBinding().executePendingBindings();
 
     }
@@ -62,7 +70,8 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
     }
 
     /**
-     *
+     * Class that helps us implement {@link android.support.v7.widget.RecyclerView.ViewHolder} pattern
+     * in the adapter.
      */
     static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -74,11 +83,17 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
             itemView.setTag(mViewDataBinding);
         }
 
-        public ViewDataBinding getViewDataBinding(){
+        ViewDataBinding getViewDataBinding() {
             return mViewDataBinding;
         }
     }
 
+    /**
+     * Method that loads an imageView using {@link Glide}
+     *
+     * @param imageView {@link ImageView} Item ImageView
+     * @param url       {@link Movie#getPosterUrl()} Poster Url from the Movie Object.
+     */
     @BindingAdapter("bind:imageUrl")
     public static void loadImage(ImageView imageView, String url) {
 
