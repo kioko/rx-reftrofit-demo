@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">RxRetrofit</string>
+    <string name="content_description_poster">Poster Image</string>
+
+    <!-- Messages -->
+    <string name="loading">Loading …</string>
+
+    <!-- Error Messages -->
+    <string name="error_no_internet_connection">No internet connection!</string>
+    <string name="error_no_message">Something went wrong on our end!</string>
+    <string name="error_no_data">No Data!</string>
+    <string name="error_db_message">Could not fetch data!</string>
 </resources>
