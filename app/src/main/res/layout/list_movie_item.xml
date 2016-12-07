@@ -5,16 +5,11 @@
     <data>
 
         <import type="com.thomaskioko.rxretrofit.model.Movie" />
-        <import type="com.thomaskioko.rxretrofit.viewmodel.MovieViewModel" />
 
         <variable
             name="movie"
             type="com.thomaskioko.rxretrofit.model.Movie" />
 
-        <variable
-            name="viewModel"
-            type="com.thomaskioko.rxretrofit.viewmodel.MovieViewModel"
-            />
     </data>
 
     <RelativeLayout
@@ -28,10 +23,9 @@
             android:layout_width="@dimen/image_medium"
             android:layout_height="@dimen/image_medium"
             android:layout_alignParentTop="true"
-            android:scaleType="centerCrop"
             android:contentDescription="@string/content_description_poster"
-            app:imageUrl="@{movie.posterUrl}"
-            android:onClick="@{viewModel.onClickImage()}"/>
+            android:scaleType="centerCrop"
+            app:imageUrl="@{movie.posterUrl}" />
 
     </RelativeLayout>
 </layout>
