@@ -12,7 +12,7 @@ import okhttp3.Response;
 
 /**
  * This class add information (API Key) to {@link okhttp3.OkHttpClient} which is passed in
- * {@link ServiceFactory#getRestAdapter()} which is required when making a request.
+ * {@link RestAPIAdapter#getRestAdapter()} which is required when making a request.
  *
  * @author Thomas Kioko
  */
