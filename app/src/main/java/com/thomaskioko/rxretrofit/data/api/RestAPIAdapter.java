@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  *
  * @author kioko
  */
-public class ServiceFactory {
+public class RestAPIAdapter {
 
     private static Retrofit mRetrofit;
     private static boolean mIsDebug;
@@ -58,7 +58,7 @@ public class ServiceFactory {
     private static Retrofit getRestAdapter() {
 
         //Enable debugging based on the build type.
-        ServiceFactory.setIsDebug(ApplicationConstants.DEBUG);
+        RestAPIAdapter.setIsDebug(ApplicationConstants.DEBUG);
 
         Retrofit.Builder builder = null;
         if (mRetrofit == null) {
@@ -103,7 +103,7 @@ public class ServiceFactory {
      *                {@link HttpLoggingInterceptor.Level#NONE}.
      */
     private static void setIsDebug(boolean isDebug) {
-        ServiceFactory.mIsDebug = isDebug;
+        RestAPIAdapter.mIsDebug = isDebug;
         if (mRetrofit != null) {
             mHttpLoggingInterceptor.
                     setLevel(isDebug ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);

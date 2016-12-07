@@ -1,4 +1,4 @@
-package com.thomaskioko.rxretrofit.data.services;
+package com.thomaskioko.rxretrofit.data.api;
 
 
 import com.thomaskioko.rxretrofit.model.MovieResult;
@@ -8,14 +8,13 @@ import rx.Observable;
 
 
 /**
- * This class contains API functions
+ * This interface contains all API endpoints.
  *
  * @author Kioko
- * @version Version
  */
 
 
-public interface MovieServices {
+public interface IMovieAPI {
 
     /**
      * Get top rated movies
