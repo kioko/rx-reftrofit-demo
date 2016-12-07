@@ -3,12 +3,13 @@ package com.thomaskioko.rxretrofit.view;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.View;
 
 import com.thomaskioko.rxretrofit.R;
-import com.thomaskioko.rxretrofit.data.api.ServiceFactory;
-import com.thomaskioko.rxretrofit.data.services.MovieServices;
+import com.thomaskioko.rxretrofit.data.api.IMovieAPI;
+import com.thomaskioko.rxretrofit.data.api.RestAPIAdapter;
 import com.thomaskioko.rxretrofit.databinding.ActivityMainBinding;
 import com.thomaskioko.rxretrofit.model.MovieResult;
 import com.thomaskioko.rxretrofit.util.DeviceUtils;
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding mActivityMainBinding;
 
-    private MovieServices mMovieServices;
+    private IMovieAPI mIMovieAPI;
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     @Override
@@ -37,10 +38,10 @@ public class MainActivity extends AppCompatActivity {
         mActivityMainBinding.recyclerViewList.setLayoutManager(recyclerViewLayoutManager);
 
 
-        mMovieServices = ServiceFactory.createRetrofitService(MovieServices.class);
+        mIMovieAPI = RestAPIAdapter.createRetrofitService(IMovieAPI.class);
 
         if (DeviceUtils.isNetworkConnected(this)) {
-            getPopularMovies();
+            loadPopularMovies();
         } else {
             mActivityMainBinding.textViewMessage.setVisibility(View.VISIBLE);
             mActivityMainBinding.textViewMessage.setText(getString(R.string.error_no_internet_connection));
@@ -50,9 +51,9 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Helper method that fetches popular movies.
      */
-    private void getPopularMovies() {
+    private void loadPopularMovies() {
 
-        mMovieServices.getPopularMovies()
+        mIMovieAPI.getPopularMovies()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<MovieResult>() {
@@ -72,8 +73,9 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onNext(MovieResult movieResult) {
 
-                        mActivityMainBinding.recyclerViewList.setAdapter(new MovieListAdapter(getApplicationContext(),
+                        mActivityMainBinding.recyclerViewList.setAdapter(new MovieListAdapter(
                                 movieResult.getResults()));
+                        mActivityMainBinding.recyclerViewList.setItemAnimator(new DefaultItemAnimator()); //it's super cool if u are doing delete or add
                     }
                 });
     }
