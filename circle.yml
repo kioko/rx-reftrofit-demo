@@ -49,9 +49,6 @@ test:
 
 
   post:
-      # junit xml report:
-      - mkdir -p $CIRCLE_TEST_REPORTS/junit-xml/
-      - find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit-xml/ \;
 
       # junit html report:
       - mkdir -p $CIRCLE_TEST_REPORTS/junit-html/
