@@ -25,7 +25,9 @@
             android:layout_alignParentTop="true"
             android:contentDescription="@string/content_description_poster"
             android:scaleType="centerCrop"
-            app:imageUrl="@{movie.posterUrl}" />
+            app:imageUrl="@{movie.posterUrl}"
+            app:imagePlaceHolder="@{@android:drawable/ic_dialog_info}"
+            app:imageError="@{@android:drawable/ic_dialog_info}"/>
 
     </RelativeLayout>
 </layout>
