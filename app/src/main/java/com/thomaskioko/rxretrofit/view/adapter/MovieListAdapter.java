@@ -1,19 +1,15 @@
 package com.thomaskioko.rxretrofit.view.adapter;
 
-import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.thomaskioko.rxretrofit.R;
 import com.thomaskioko.rxretrofit.databinding.ListMovieItemBinding;
 import com.thomaskioko.rxretrofit.model.Movie;
-import com.thomaskioko.rxretrofit.util.ApplicationConstants;
 import com.thomaskioko.rxretrofit.util.DisplayUtils;
 
 import java.util.List;
@@ -97,20 +93,5 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
         }
     }
 
-    /**
-     * Method that loads an imageView using {@link Glide}
-     *
-     * @param imageView {@link ImageView} Item ImageView
-     * @param url       {@link Movie#getPosterUrl()} Poster Url from the Movie Object.
-     */
-    @BindingAdapter("bind:imageUrl")
-    public static void loadImage(ImageView imageView, String url) {
-
-        Glide.with(imageView.getContext())
-                .load(ApplicationConstants.TMDB_IMAGE_URL + ApplicationConstants.IMAGE_SIZE_780 + url)
-                .centerCrop()
-                .placeholder(R.color.placeholder)
-                .into(imageView);
-    }
 }
 
