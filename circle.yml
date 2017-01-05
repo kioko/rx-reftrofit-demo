@@ -45,12 +45,9 @@ test:
     # - ./gradlew assemble connectedDebugAndroidTest -PdisablePreDex --console=plain --info
 
     # This will ensure the app is build successfully with no errors before running the test
-    - (./gradlew assemble):
-      timeout: 360
+    - ./gradlew assemble
+    - ./gradlew test
 
-    # This will run the tests:
-    - (./gradlew test):
-           timeout: 360
 
 
   post:
