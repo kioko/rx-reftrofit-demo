@@ -30,18 +30,23 @@ dependencies:
 
 # Comment the test stuff out (or remove it) if you don't need it.
 test:
-  pre:
-    - emulator -avd circleci-android22 -no-audio -no-window:
-          background: true
-          parallel: true
-    - circle-android wait-for-boot
-    # unlock emulator
-    - sleep 30
-    - adb shell input keyevent 82
+
+#  pre:
+#    - emulator -avd circleci-android22 -no-audio -no-window:
+#          background: true
+#          parallel: true
+#    - circle-android wait-for-boot
+#    # unlock emulator
+#    - sleep 30
+#    - adb shell input keyevent 82
 
   override:
     # - ./gradlew clean assemble
     # - ./gradlew assemble connectedDebugAndroidTest -PdisablePreDex --console=plain --info
+
+    # This will ensure the app is build successfully with no errors before running the test
+    - (./gradlew assemble):
+      timeout: 360
 
     # This will run the tests:
      - ./gradlew test
@@ -62,4 +67,3 @@ test:
 
       # Artifact - APK's
       - cp -r app/build/outputs $CIRCLE_ARTIFACTS
-      - cp -r app/build/outputs/androidTest-results/ $CIRCLE_TEST_REPORTS
