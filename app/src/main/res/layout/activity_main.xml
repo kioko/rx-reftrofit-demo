@@ -3,7 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data></data>
+    <data>
+
+        <import type="java.util.List" />
+
+        <import type="com.thomaskioko.rxretrofit.model.Movie" />
+
+        <variable
+            name="movieList"
+            type="List&lt;Movie>" />
+
+    </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,7 +23,7 @@
             android:id="@+id/recycler_view_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutManager="LinearLayoutManager"
+            app:movieList="@{movieList}"
             tools:context=".view.PodCastListActivity" />
 
         <ProgressBar
