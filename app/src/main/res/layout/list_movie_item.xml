@@ -10,6 +10,10 @@
             name="movie"
             type="com.thomaskioko.rxretrofit.model.Movie" />
 
+        <variable
+            name="listeners"
+            type="com.thomaskioko.rxretrofit.view.util.ListenerBinding"/>
+
     </data>
 
     <RelativeLayout
@@ -25,9 +29,10 @@
             android:layout_alignParentTop="true"
             android:contentDescription="@string/content_description_poster"
             android:scaleType="centerCrop"
+            android:onClick="@{listeners}"
             app:imageUrl="@{movie.posterUrl}"
-            app:imagePlaceHolder="@{@android:drawable/ic_dialog_info}"
-            app:imageError="@{@android:drawable/ic_dialog_info}"/>
+            app:imagePlaceHolder="@{@color/placeholder}"
+            app:imageError="@{@color/placeholder}"/>
 
     </RelativeLayout>
 </layout>
