@@ -13,6 +13,7 @@ import com.thomaskioko.rxretrofit.model.MovieResult;
 import com.thomaskioko.rxretrofit.util.DeviceUtils;
 
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding mActivityMainBinding;
     private IMovieAPI mIMovieAPI;
+    private Subscription mSubscription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
      */
     private void loadPopularMovies() {
 
-        mIMovieAPI.getPopularMovies()
-                .subscribeOn(Schedulers.newThread())
+        mSubscription = mIMovieAPI.getPopularMovies()
+                .subscribeOn(Schedulers.io()) //Run this task in the io thread
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<MovieResult>() {
                     @Override
@@ -64,5 +66,24 @@ public class MainActivity extends AppCompatActivity {
                         mActivityMainBinding.setMovieList(movieResult.getResults());
                     }
                 });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (mSubscription != null && !mSubscription.isUnsubscribed()) {
+            mSubscription.unsubscribe();
+        }
     }
 }
